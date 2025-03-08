@@ -1,18 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Board;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
-/**
- * @method middleware(string $string)
- */
 class BoardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');  // Авторизация для всех методов
+        $this-> middleware('auth');  // Авторизация для всех методов
     }
 
     public function index()

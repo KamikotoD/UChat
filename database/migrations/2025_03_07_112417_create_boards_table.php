@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
-            $table->string('title');  // Название доски
+            $table->string('title')->unique();  // Название доски
             $table->text('description')->nullable(); // Описание доски
             $table->unsignedBigInteger('user_id');  // Идентификатор пользователя, который создал доску
             $table->timestamps();
