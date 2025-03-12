@@ -22,23 +22,43 @@ class BoardController extends Controller
     {
         return view('boards.create');
     }
-
-    public function store(Request $request)
+    public  function show(Board $board)
     {
-        $request->validate([
+        return view('boards.show', ['board' => $board]);
+    }
+    public function store()
+    {
+        request()->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
         ]);
 
         Board::create([
-            'title' => $request->title,
-            'description' => $request->description,
+            'title' => request('title'),
+            'description' => request('description'),
             'user_id' => auth()->id(),  // Сохраняем id текущего авторизованного пользователя
         ]);
 
         return redirect()->route('boards.index');
     }
+    public  function edit(Board $board)
+    {
+        return view('boards.edit', ['board' => $board]);
+    }
+    public function update(Board $board)
+    {
+        request()->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+        ]);
 
+        $board->update([
+            'title' => request('title'),
+            'description' => request('description')
+        ]);
+
+        return redirect('/boards/'. $board->id);
+    }
     public function destroy(Board $board)
     {
         // Проверка на право удаления
