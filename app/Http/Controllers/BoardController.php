@@ -24,7 +24,9 @@ class BoardController extends Controller
     }
     public  function show(Board $board)
     {
-        return view('boards.show', ['board' => $board]);
+        $posts = $board->posts()->latest()->get();
+
+        return view('boards.show', compact('board', 'posts'));
     }
     public function store()
     {
