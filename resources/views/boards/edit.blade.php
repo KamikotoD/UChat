@@ -24,7 +24,7 @@
             <x-input-label for="description" :value="__('Board Description')" />
             <div class="max-w-md mx-auto">
                 <x-text-input id="description"
-                              class="block mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                              class="block mt-1 w-full h-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                               type="text"
                               name="description"
                               value="{{$board->description}}" />

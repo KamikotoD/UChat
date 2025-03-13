@@ -28,5 +28,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('posts', PostController::class);
     Route::get('/boards/{board}/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/boards/{board}/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::get('/boards/{board}/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 });

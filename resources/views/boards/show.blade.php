@@ -29,9 +29,11 @@
         <div class="bg-white shadow-md p-4 rounded-lg">
             @forelse ($posts as $post)
                 <div class="border-b border-gray-300 py-4">
-                    <h3 class="text-lg font-semibold">{{ $post->title }}</h3>
-                    <p class="text-gray-600">{{ $post->content }}</p>
-                    <p class="text-sm text-gray-500">Автор: {{ $post->user->name }}</p>
+                    <a href="{{ route('posts.show', ['board' => $post->board_id, 'post' => $post->id]) }}">
+                        <h3 class="text-lg font-semibold">{{ $post->title }}</h3>
+                        <!--<p class="text-gray-600">{{ $post->content }}</p>-->
+                        <p class="text-sm text-gray-500">Автор: {{ $post->user->name }}</p>
+                    </a>
                 </div>
             @empty
                 <p class="text-gray-500">Постов пока нет.</p>
