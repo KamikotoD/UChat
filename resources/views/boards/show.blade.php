@@ -34,6 +34,25 @@
                         <!--<p class="text-gray-600">{{ $post->content }}</p>-->
                         <p class="text-sm text-gray-500">Автор: {{ $post->user->name }}</p>
                     </a>
+                    <!-- Лайки і дизлайки -->
+                    <div class="mt-2 flex space-x-4 items-center">
+                        <!-- Лайки -->
+                        <form action="{{ route('posts.like', $post) }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="flex items-center space-x-2 text-sm text-blue-500 hover:text-blue-600">
+                                <span>👍</span>
+                                <span>{{  $post->totalLikes()}}</span>
+                            </button>
+                        </form>
+
+                        <!-- Дизлайки -->
+                        <form action="{{ route('posts.dislike', $post) }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="flex items-center space-x-2 text-sm text-red-500 hover:text-red-600">
+                                <span>👎</span>
+                                <span>{{ $post->totalDislikes() }}</span>
+                            </button>
+                        </form>
                 </div>
             @empty
                 <p class="text-gray-500">Постов пока нет.</p>
