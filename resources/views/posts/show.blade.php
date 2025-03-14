@@ -48,6 +48,15 @@
                 <div class="border-t py-4">
                     <p class="text-sm text-gray-600"><strong>{{ $comment->user->name }}</strong> – {{ $comment->created_at->format('d.m.Y H:i') }}</p>
                     <p class="text-gray-800">{{ $comment->content }}</p>
+                    @if ($comment->user_id === auth()->id())
+                        <!-- Delete Button (Form) -->
+                        <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="mt-2 inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:text-red-700">Удалить</button>
+                        </form>
+
+                    @endif
                 </div>
             @endforeach
 

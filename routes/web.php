@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::middleware(['auth'])->group(function () {
     Route::resource('posts', PostController::class);
+    Route::resource('comments', CommentController::class);
     Route::get('/boards/{board}/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/boards/{board}/posts', [PostController::class, 'store'])->name('posts.store');
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
@@ -34,4 +35,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('posts.like');
     Route::post('/posts/{post}/dislike', [PostController::class, 'dislike'])->name('posts.dislike');
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+
 });

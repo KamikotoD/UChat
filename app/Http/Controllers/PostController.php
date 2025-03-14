@@ -82,7 +82,14 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if ($post->user_id != auth()->id()) {
+            return redirect()->route('boards.show', ['board' => $post->board_id])
+                ->withErrors('Вы не можете удалить этот пост');
+        }
+
+        $post->delete();
+
+        return redirect()->route('boards.show', ['board' => $post->board_id]);
     }
     // Метод для лайка
     public function like(Post $post)
