@@ -17,7 +17,7 @@
                         Back to Board
                     </a>
                     @if(auth()->id() === $post->user_id)
-                        <a href="{{ route('posts.edit', $post) }}" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                        <a href="{{ route('posts.edit', ['board' => $post->board_id, 'post' => $post->id]) }}" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
                             Edit
                         </a>
                         <form action="{{ route('posts.destroy', $post) }}" method="POST" class="inline">
@@ -34,6 +34,22 @@
 
         <!-- Секція з коментарями (якщо потрібно) -->
         <div class="bg-white shadow-md p-6 rounded-lg mt-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Комментарии</h2>
+
+            <!-- Форма добавления комментария -->
+            <form action="{{ route('comments.store', $post) }}" method="POST" class="mb-4">
+                @csrf
+                <textarea name="content" rows="3" class="w-full border rounded-lg p-2 resize-none" placeholder="Напишите комментарий..." required></textarea>
+                <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                    Отправить
+                </button>
+            </form>
+            @foreach ($post->comments as $comment)
+                <div class="border-t py-4">
+                    <p class="text-sm text-gray-600"><strong>{{ $comment->user->name }}</strong> – {{ $comment->created_at->format('d.m.Y H:i') }}</p>
+                    <p class="text-gray-800">{{ $comment->content }}</p>
+                </div>
+            @endforeach
 
         </div>
     </div>

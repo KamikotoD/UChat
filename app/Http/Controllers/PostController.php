@@ -47,7 +47,7 @@ class PostController extends Controller
      */
     public function show(Board $board, Post $post)
     {
-
+        $post->load(['user', 'comments.user']);
         return view('posts.show', compact('post'));
     }
 
@@ -56,15 +56,25 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Post $post)
     {
-        //
+        request()->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string|max:1000',
+        ]);
+
+        $post->update([
+            'title' => request('title'),
+            'content' => request('content')
+        ]);
+
+        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
     /**

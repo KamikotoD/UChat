@@ -33,4 +33,8 @@ class Post extends Model
     {
         return $this->hasMany(PostLike::class)->where('type', 'dislike')->count();
     }
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
 }

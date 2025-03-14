@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('posts', PostController::class);
     Route::get('/boards/{board}/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/boards/{board}/posts', [PostController::class, 'store'])->name('posts.store');
-    Route::get('/boards/{board}/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+    Route::post('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('posts.like');
     Route::post('/posts/{post}/dislike', [PostController::class, 'dislike'])->name('posts.dislike');
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
